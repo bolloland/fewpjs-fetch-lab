@@ -10,6 +10,7 @@ function fetchBooks() {
     //.then(json => renderBooks(json))
     //this format allows the resonse.json == json
     // we then take that json data and gets put into the renderBooks function below
+    //THEN basically says, "don't do jack until I get this resolved"
     )}
 
 function renderBooks(books) {
@@ -30,7 +31,12 @@ function renderBooks(books) {
   });
 }
 
-
+//THIS IS HUGE
+//so none of this will work unless FETCH is inside the callback method
+//fetch is in fetchBooks which is the callback method.
+//it says, "no one is doing anything until I'm done running fetchBooks"
+//ASYNCHRONOUS = no other JS code runs until that's done.
+// AND - it won't work if that fetch isn't in there. 
 document.addEventListener('DOMContentLoaded', function() {
   fetchBooks();
 });
