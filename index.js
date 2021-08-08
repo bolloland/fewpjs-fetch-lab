@@ -1,42 +1,48 @@
-function fetchBooks() {
-  //function called fetchBooks(), does the following:
-  return fetch("https://anapioficeandfire.com/api/books")
-  //display on DOM (RETURN) this fetch request from this db/server
-  .then(bananas => bananas.json())
-      //.then(response => response.json)
-      //then, we get a response of everything(bananas), but we only want the 
-      //JSON data, so use dot notation to get that. bananas.json or response.json
-  .then(apples => renderBooks(apples)
-    //.then(json => renderBooks(json))
-    //this format allows the resonse.json == json
-    // we then take that json data and gets put into the renderBooks function below
-    //THEN basically says, "don't do jack until I get this resolved"
-    )}
+// fetch('https://anapioficeandfire.com/api/books')
+//   .then(resp => resp.json())
+//   .then(json => console.log(json[4]["name"]));
 
-function renderBooks(books) {
-  //renderBooks takes in some data (books - in this case our json data)
-  const main = document.querySelector('main');
-  //finds and names the 'main' section in our HTML with a constant variable
-  books.forEach(book => {
-    //interpolates over our JSON data and does...
-    const h2 = document.createElement('h2');
-    //creates an h2 element tag (and names it)
-    h2.innerHTML = book.name;
-    //and then inserts the .name value from reach book in the json
-    //safe to say that one would have to manually search/parse the data to know
-    //exactly where to get that specific information 
-    main.appendChild(h2);
-    //the H2 element has the book title, so we APPEND that CHILD node to the `main` 
-    //section inside out HTML
-  });
+//   fetch('https://anapioficeandfire.com/api/characters/1031')
+//   .then(resp => resp.json())
+//   .then(json => console.log(json["name"]))
+
+//   fetch('https://anapioficeandfire.com/api/books')
+//   .then(resp => resp.json())
+//   .then(json => {
+//     pagesArray = []
+//     for (i = 0; i < json.length; i++) {
+//     pagesArray.push(json[i]["numberOfPages"])
+//     }
+//     console.log(pagesArray)
+//     const reducer = (adder, current) => adder + current
+//     console.log(pagesArray.reduce(reducer))
+//   });
+///////////////////////////////////////////////   DELIVERABLES ///////////
+let fetchBooks = () => {
+  return fetch("https://anapioficeandfire.com/api/books")
+  .then(resp => resp.json())
+  .then(json => renderBooks(json))
 }
 
-//THIS IS HUGE
-//so none of this will work unless FETCH is inside the callback method
-//fetch is in fetchBooks which is the callback method.
-//it says, "no one is doing anything until I'm done running fetchBooks"
-//ASYNCHRONOUS = no other JS code runs until that's done.
-// AND - it won't work if that fetch isn't in there. 
-document.addEventListener('DOMContentLoaded', function() {
-  fetchBooks();
-});
+let renderBooks = (books) => {
+  let ul = document.createElement("ul")
+  let bookList = document.querySelector("#booklist")
+  books.forEach(x => {
+    let h3 = document.createElement("h3")
+    h3.innerText = x.name
+    bookList.appendChild(h3)
+  })
+}
+
+
+
+
+  // fetch('https://anapioficeandfire.com/api/books')
+  // .then(resp => resp.json())
+  // .then(json => {
+  //   characterArray = []
+  //   for (i = 0; i < json.length; i++) {
+  //   json[i]["characters"].forEach(x => characterArray.push(x))
+  //   }
+  //   console.log(characterArray)
+  // });
